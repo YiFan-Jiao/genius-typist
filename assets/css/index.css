@@ -14,7 +14,7 @@ main {
     justify-content: center;
     align-items: center;
     justify-items: center;
-    grid-template-rows:50px 600px 50px;
+    grid-template-rows:50px 500px 50px 100px;
     gap: 20px;
     text-align: center;
     color: #fff;
@@ -43,20 +43,11 @@ main {
     grid-template-rows: 100px 100px 100px 100px;
     gap: 20px;
     text-align: center;
-    
 }
 
 .show-word {
     font-size: 50px;
 }
-
-/* .one-word {
-    border-radius: 10px;
-    width: 30px;
-    background-color: #1d1163;
-    height: 30px;
-    padding: 15px;
-} */
 
 input {
     height: 50px;
@@ -78,4 +69,8 @@ input {
 .time {
     font-size: 60px;
     color: #ff0000;
+}
+
+.user-info {
+    font-size: 30px;
 }
