@@ -1,16 +1,81 @@
 @import url("./reset.css");
 
-body {
-    background-color: #14161D;
-}
-
 main {
-    min-height: 100vh - 80px;
-    color: #fff;
+    /* height: 100vh; */
+    background-color: #171A22;
 }
 
 .container {
+    height: 100vh;
     width: min(100% - 30px, 1080px);
     margin-inline: auto;
+    display: grid;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    justify-items: center;
+    grid-template-rows:50px 600px 50px;
+    gap: 20px;
+    text-align: center;
+    color: #fff;
 }
 
+.page-name {
+    font-size: 50px;
+}
+
+.start {
+    background-color: #009D5D;
+    font-size: 20px;
+    padding: 10px 50px;
+    border-radius: 10px;
+}
+
+.game-box {
+    width: 900px;
+    height: 600px;
+    border-radius: 10px;
+    display: grid;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    justify-items: center;
+    grid-template-rows: 100px 100px 100px 100px;
+    gap: 20px;
+    text-align: center;
+    
+}
+
+.show-word {
+    font-size: 50px;
+}
+
+/* .one-word {
+    border-radius: 10px;
+    width: 30px;
+    background-color: #1d1163;
+    height: 30px;
+    padding: 15px;
+} */
+
+input {
+    height: 50px;
+    border-radius: 10px;
+    font-size: 30px;
+    width: 250px;
+    padding: 10px;
+    text-align: center;
+    background-color: #272A31;
+    color: #fff;
+}
+
+.score {
+    font-size: 40px;
+    color: #00ff80;
+    font-weight: 600;
+}
+
+.time {
+    font-size: 60px;
+    color: #ff0000;
+}
