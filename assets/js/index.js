@@ -25,12 +25,13 @@ const wordArray = ['dinosaur', 'love', 'pineapple', 'calendar', 'robot',
 'awesome', 'challenge', 'science', 'mystery', 'famous', 'league', 'memory', 
 'leather', 'planet', 'software', 'update', 'yellow', 'keyboard', 'window']
 
+let rank = [];
 let scores = 0;
 let i = 0;
 let count = 'timeCount';
 start.addEventListener('click', () => {
     if(time.innerHTML.trim() === '--s') {
-        let times = 99;
+        let times = 5;//改时间
         wordArray.sort(() => Math.random() - 0.5);
         music.play();
 
@@ -48,7 +49,7 @@ start.addEventListener('click', () => {
     } else {
         music.load();
         clearInterval(count);
-        let times = 99;
+        let times = 5;//改时间
         scores = 0;
         i = 0;
         score.innerHTML = '--';
@@ -111,7 +112,7 @@ class Score {
     }
 
     getInfo () {
-        return `${this.getdate} ${this.gethits} ${this.getpercentage}`
+        return `${this.gethits} ${this.getpercentage}`
     }
 }
 
@@ -124,6 +125,34 @@ function getInfo() {
     const scoreInfo = new Score(dates,scores,percent);
     scoreInfo.getInfo();
     const lastInfo = scoreInfo.getInfo().trim().split(' ');
-    userInfo.innerHTML = `Date:${lastInfo[0]} ${lastInfo[1]} ${lastInfo[2]}, Get points:${lastInfo[3]}, The points percentage is:${lastInfo[4]}.`
+    /* userInfo.innerHTML = `Date:${lastInfo[0]} ${lastInfo[1]} ${lastInfo[2]}, Get points:${lastInfo[3]}, The points percentage is:${lastInfo[4]}.` 
+    */
+    //console.log(lastInfo)
+    /* userInfo.innerHTML = `${lastInfo[3]} words, ${lastInfo[4]}.`; */
+    /* rank.push() */
+    const userRank = {
+        hits: lastInfo[0],
+        percentage:lastInfo[1]
+    }
+   // console.log(userRank)
+    const arrString = JSON.stringify(userRank);
+    
+    //console.log(rank)
+    //localStorage.setItem("cart",JSON.stringify(n));
+    localStorage.setItem(`${new Date()}`,JSON.stringify(arrString));
+
+
+    for (var i=0;i<localStorage.length;i++) {
+        console.log(localStorage.key(i));
+    }
+    //console.log(localStorage.length) 
+    console.log()
+    console.log(localStorage.valueOf()) 
+    //rank.push(arrString);
+
+    
+
+    // console.log(arrString)
+    //console.log(JSON.parse(arrString))
 }
 
