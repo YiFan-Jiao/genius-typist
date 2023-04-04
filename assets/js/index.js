@@ -6,7 +6,7 @@ const score = document.querySelector('.score');
 const time = document.querySelector('.time');
 const start = document.querySelector('.start');
 const userInfo = document.querySelector('.user-info');
-
+const rankLists = document.querySelector('.rank-list');
 const music = new Audio('./assets/audio/Love is like fire.mp3');
 music.type = 'audio/mp3';
 
@@ -25,13 +25,14 @@ const wordArray = ['dinosaur', 'love', 'pineapple', 'calendar', 'robot',
 'awesome', 'challenge', 'science', 'mystery', 'famous', 'league', 'memory', 
 'leather', 'planet', 'software', 'update', 'yellow', 'keyboard', 'window']
 
-let rank = [];
 let scores = 0;
 let i = 0;
 let count = 'timeCount';
 start.addEventListener('click', () => {
+    textInput.focus();
+    start.innerHTML = 'Restart';
     if(time.innerHTML.trim() === '--s') {
-        let times = 5;//改时间
+        let times = 99;//change time
         wordArray.sort(() => Math.random() - 0.5);
         music.play();
 
@@ -49,7 +50,7 @@ start.addEventListener('click', () => {
     } else {
         music.load();
         clearInterval(count);
-        let times = 5;//改时间
+        let times = 99;//change time
         scores = 0;
         i = 0;
         score.innerHTML = '--';
@@ -127,32 +128,51 @@ function getInfo() {
     const lastInfo = scoreInfo.getInfo().trim().split(' ');
     /* userInfo.innerHTML = `Date:${lastInfo[0]} ${lastInfo[1]} ${lastInfo[2]}, Get points:${lastInfo[3]}, The points percentage is:${lastInfo[4]}.` 
     */
-    //console.log(lastInfo)
-    /* userInfo.innerHTML = `${lastInfo[3]} words, ${lastInfo[4]}.`; */
-    /* rank.push() */
+
+    let rank = [];
+    //get old rank
+    if(localStorage.length != 0) {
+        rank = JSON.parse(localStorage.rank);
+    }
+ 
     const userRank = {
         hits: lastInfo[0],
         percentage:lastInfo[1]
     }
-   // console.log(userRank)
+   
     const arrString = JSON.stringify(userRank);
-    
+
+    rank.push(arrString);
+    rank.sort().reverse()
     //console.log(rank)
-    //localStorage.setItem("cart",JSON.stringify(n));
-    localStorage.setItem(`${new Date()}`,JSON.stringify(arrString));
-
-
-    for (var i=0;i<localStorage.length;i++) {
-        console.log(localStorage.key(i));
+    if(rank.length < 10) {
+        localStorage.setItem("rank",JSON.stringify(rank));
+    } else {
+        let rank9 = rank.slice(0, 9);
+        console.log(rank9);
+        localStorage.setItem("rank",JSON.stringify(rank9));
     }
-    //console.log(localStorage.length) 
-    console.log()
-    console.log(localStorage.valueOf()) 
-    //rank.push(arrString);
 
-    
-
-    // console.log(arrString)
-    //console.log(JSON.parse(arrString))
+    getRank();
 }
 
+function getRank() {
+    rankLists.innerHTML = `<div class="rank-head">
+                                HIGH SCORES
+                            </div>`
+    if(localStorage.rank) {
+        const rankList = JSON.parse(localStorage.rank);
+        rankList.forEach((element,index) => {
+            const rankSplit = element.split('"');
+            const contactDiv = document.createElement("div");
+            contactDiv.className = "rank";
+            contactDiv.innerHTML = `<div>#${index+1}</div>
+                                    <div>${rankSplit[3]} words</div>
+                                    <div>${rankSplit[7]}</div>`
+            rankLists.appendChild(contactDiv);
+        });
+    }
+}
+
+//localStorage.clear()
+getRank()
